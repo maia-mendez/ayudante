@@ -1,8 +1,8 @@
+const textoReconocidoElement = document.querySelector("p")
+const boton = document.querySelector("button")
 if ('webkitSpeechRecognition' in window) {
 
     const reconocimiento = new webkitSpeechRecognition();
-
-
 
     reconocimiento.continuous = true;
 
@@ -15,8 +15,6 @@ if ('webkitSpeechRecognition' in window) {
         textoReconocidoElement.textContent = 'Escuchando...';
 
     };
-
-
 
     reconocimiento.onresult = function (event) {
         const resultado = event.results[event.results.length - 1];
@@ -35,3 +33,4 @@ if ('webkitSpeechRecognition' in window) {
     textoReconocidoElement.textContent = 'El reconocimiento de voz no es compatible con tu navegador.';
     boton.disabled = true;
 }
+
