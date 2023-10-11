@@ -1,5 +1,15 @@
 const textoReconocidoElement = document.querySelector("p")
 const boton = document.querySelector("button")
+const audio = document.querySelector("audio")
+
+function controlarmusica(texto){
+if(texto.includes("repoducir")){
+    audio.play()
+}else if (texto.includes("pausar")) {
+    audio.pause
+}
+
+}
 function repetirTexto(texto){
     const letra =texto;
     const synth= window.speechSynthesis;
@@ -30,6 +40,7 @@ if ('webkitSpeechRecognition' in window) {
         let miTexto = textoReconocidoElement.textContent
         textoReconocidoElement.textContent += ' (Fin del reconocimiento)';
         repetirTexto(miTexto)
+        controlarMusica(miTexto)
     };
 
  iniciarReconocimientoBtn.addEventListener("click", function () {    
