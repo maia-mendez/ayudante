@@ -1,20 +1,25 @@
 const textoReconocidoElement = document.querySelector("p")
 const boton = document.querySelector("button")
+function repetirTexto(texto){
+    const letra =texto;
+    const synth= window.speechSynthesis;
+    const speechutterance = new SpeechSynthesisUtterance(letra);
+    synth.speak(speechutterance);
+}
 if ('webkitSpeechRecognition' in window) {
 
     const reconocimiento = new webkitSpeechRecognition();
 
     reconocimiento.continuous = true;
-
-    reconocimiento.lang = 'es-ES'; 
-
-
+    reconocimiento.lang = 'es-ES';
 
     reconocimiento.onstart = function () {
 
         textoReconocidoElement.textContent = 'Escuchando...';
 
     };
+
+
 
     reconocimiento.onresult = function (event) {
         const resultado = event.results[event.results.length - 1];
@@ -26,11 +31,12 @@ if ('webkitSpeechRecognition' in window) {
         textoReconocidoElement.textContent += ' (Fin del reconocimiento)';
         repetirTexto(miTexto)
     };
-    iniciarReconocimientoBtn.addEventListener("click", function () {
-        reconocimiento.start();
-    });
+
+ iniciarReconocimientoBtn.addEventListener("click", function () {    
+        reconocimiento.start(); });
+
 } else {
+
     textoReconocidoElement.textContent = 'El reconocimiento de voz no es compatible con tu navegador.';
     boton.disabled = true;
 }
-
